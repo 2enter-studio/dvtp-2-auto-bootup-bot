@@ -1,4 +1,5 @@
 import robot from 'robotjs';
+import { open_ue5 } from './lib/run-command.js';
 
 robot.setKeyboardDelay(300);
 
@@ -19,15 +20,23 @@ function unreal_play() {
   key_binding(['alt', 'p'])
 }
 
-const {width, height} = robot.getScreenSize();
+const { width, height } = robot.getScreenSize();
 
 // await sleep(4000);
 
 // console.log('pressed')
 // unreal_play();
 
-console.log(width, height)
-for (let i = 0; i < 10; i++){
-  await sleep(500)
-  console.log(robot.getMousePos());
+
+async function main() {
+  await open_ue5();
+  await sleep(20000);
+
+  console.log(width, height)
+  unreal_play();
+  // for (let i = 0; i < 10; i++) {
+  //   await sleep(500)
+  //   console.log(robot.getMousePos());
+  // }
 }
+main()
