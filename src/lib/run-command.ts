@@ -4,7 +4,7 @@ import 'dotenv/config';
 const root_dir = process.env.PROJ_ROOT as string;
 
 export const open_ue5 = async () => {
-  const command = `${root_dir}\\ps-scripts\\test.ps1`
+  const command = `${root_dir}\\\\ps-scripts\\\\test.ps1`
   console.log(command)
   const child = spawn("powershell.exe", [command]);
 
