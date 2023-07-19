@@ -1,0 +1,1 @@
+UE5 "C:\\Users\\User\\Documents\\Unreal Projects\\ue5_cpp_proj\\ue5_cpp_proj.uproject";

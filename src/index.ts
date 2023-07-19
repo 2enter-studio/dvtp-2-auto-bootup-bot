@@ -1,5 +1,5 @@
 import robot from 'robotjs';
-import { open_ue5 } from './lib/run-command.js';
+import { open_screenshot_node_server, open_ue5 } from './lib/run-command.js';
 import 'dotenv/config'
 import dns from 'dns'
 
@@ -37,8 +37,8 @@ async function switch_tab(switch_count: number = 1){
   robot.keyToggle('alt', 'up')
 }
 
-function window_go_left() {
-  key_binding(['command', 'left'], 1000)
+function window_go_up() {
+  key_binding(['command', 'up'], 1000)
 }
 
 
@@ -64,27 +64,28 @@ function get_mouse_pos() {
 
 
 async function main() {
+  // Open Screenshot Server
+  await open_screenshot_node_server();
+  await sleep(10000)
+
+  // Open Unreal Engine 5 and play
+  await open_ue5();
+  await sleep(18000)
+  unreal_play();
+  await sleep(3000)
+
+  // Open Arena
   await click_desktop_icon(arena_icon_pos);
-  await sleep(1000);
-  await switch_tab(5);
-  await sleep(10000);
 
+  await sleep(3000);
+  // await switch_tab(5);
+  // await sleep(10000);
 
-  window_go_left();
+  // Make Arena window left, and that'll make the ue5 window right, also focus on the later one.
+  window_go_up();
   await sleep(1000);
   robot.keyTap('enter');
-  await sleep(100000);
-  await open_ue5();
-  await sleep(20000);
-
-  console.log(width, height)
-  unreal_play();
-  await sleep(1000)
-  // await switch_tab();
-  // for (let i = 0; i < 10; i++) {
-  //   await sleep(500)
-  //   console.log(robot.getMousePos());
-  // }
+  console.log('All done!')
 }
 
 // get_mouse_pos();
