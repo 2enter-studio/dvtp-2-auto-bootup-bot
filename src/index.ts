@@ -106,6 +106,7 @@ async function main() {
 	}
 
 	if (mode === 'moca-vr') {
+		await sleep(120000);
 		await switch_tab(3);
 		await sleep(1000);
 	}
