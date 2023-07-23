@@ -104,6 +104,11 @@ async function main() {
 		await switch_tab(4);
 		await sleep(5000);
 	}
+
+	if (mode === 'moca-vr') {
+		await switch_tab(3);
+		await sleep(1000);
+	}
 	// Play UE5
 	if (['kdmofa', 'moca', 'linz', 'kdmofa-vr', 'moca-vr', 'linz-vr'].includes(mode)) {
 		unreal_play();
