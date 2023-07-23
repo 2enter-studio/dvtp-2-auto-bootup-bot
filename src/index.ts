@@ -2,6 +2,7 @@ import robot from 'robotjs';
 import { open_screenshot_node_server } from './lib/run-command.js';
 import 'dotenv/config';
 import dns from 'dns';
+import get_mode from './lib/get_argv.js';
 
 function get_icon_pos(name: string) {
 	const pos_list = (process.env[name] as string).split(',').map((x) => parseInt(x));
@@ -47,14 +48,6 @@ async function switch_tab(switch_count: number = 1) {
 	robot.keyToggle('alt', 'up');
 }
 
-function window_go_up() {
-	key_binding(['command', 'up'], 1000);
-}
-
-function window_go_left() {
-	key_binding(['command', 'left'], 1000);
-}
-
 const { width, height } = robot.getScreenSize();
 
 async function click_desktop_icon(icon_pos: { x: number; y: number }, double_click = true) {
@@ -64,17 +57,15 @@ async function click_desktop_icon(icon_pos: { x: number; y: number }, double_cli
 	robot.mouseClick();
 	if (double_click) robot.mouseClick();
 }
-async function click_login_icon(icon_pos: { x: number; y: number }) {
-	robot.moveMouse(icon_pos.x, icon_pos.y);
 
-	robot.mouseClick();
-	robot.mouseClick();
+async function login_wifi() {
+	await click_desktop_icon(icon_pos.chrome, false);
+	await sleep(3000);
+	robot.keyTap('tab');
+	robot.keyTap('tab');
+	robot.keyTap('tab');
+	robot.keyTap('enter');
 }
-
-// await sleep(4000);
-
-// console.log('pressed')
-// unreal_play();
 
 function get_mouse_pos() {
 	setInterval(() => {
@@ -83,42 +74,41 @@ function get_mouse_pos() {
 }
 
 async function main() {
+	const mode = get_mode();
+
+	// Connect to Wi-Fi
+	if (['kdmofa', 'kdmofa-vr', 'kdmofa-cctv'].includes(mode)) {
+		await login_wifi();
+		await sleep(5000);
+	}
+
 	// Open Screenshot Server
-	await click_desktop_icon(icon_pos.chrome, false);
-	await sleep(3000);
-	robot.keyTap('tab');
-	robot.keyTap('tab');
-	robot.keyTap('tab');
-	robot.keyTap('enter');
-
-	await back_to_desktop();
-
-	await open_screenshot_node_server();
-	await sleep(10000);
+	// Open OBS Studio
+	if (['kdmofa', 'moca', 'linz'].includes(mode)) {
+		await open_screenshot_node_server();
+		await sleep(10000);
+		await click_desktop_icon(icon_pos.obs);
+		await sleep(5000);
+	}
 
 	// Open Unreal Engine 5
-	// await open_ue5();
-	await click_desktop_icon(icon_pos.obs);
-	await sleep(10000);
-	await click_desktop_icon(icon_pos.ue5);
-	await sleep(50000);
+	if (['kdmofa', 'moca', 'linz', 'kdmofa-vr', 'moca-vr', 'linz'].includes(mode)) {
+		await click_desktop_icon(icon_pos.ue5);
+		await sleep(50000);
+	}
 
 	// Open Arena
-	await click_desktop_icon(icon_pos.arena);
-
-	await sleep(10000);
-	await switch_tab(4);
-
+	if (['kdmofa', 'moca', 'linz'].includes(mode)) {
+		await click_desktop_icon(icon_pos.arena);
+		// Switch back to UE5
+		await sleep(10000);
+		await switch_tab(4);
+		await sleep(5000);
+	}
 	// Play UE5
-	await sleep(5000);
-	unreal_play();
-	await sleep(3000);
-	// await sleep(10000);
-
-	// Make Arena window left, and that'll make the ue5 window right, also focus on the later one.
-	//window_go_left();
-	//.await sleep(1000);
-	//robot.keyTap('enter');
+	if (['kdmofa', 'moca', 'linz', 'kdmofa-vr', 'moca-vr', 'linz-vr'].includes(mode)) {
+		unreal_play();
+	}
 	console.log('All done!');
 }
 
