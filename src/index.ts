@@ -10,11 +10,11 @@ function get_icon_pos(name: string) {
 }
 
 const icon_pos = {
-	arena: get_icon_pos('ARENA_ICON_POS'),
-	ue5: get_icon_pos('UE5_ICON_POS'),
-	obs: get_icon_pos('OBS_ICON_POS'),
-	chrome: get_icon_pos('CHROME_ICON_POS'),
-	login: get_icon_pos('LOGIN_ICON_POS')
+	arena: get_icon_pos('ARENA_ICON_POS') || { x: 0, y: 0 },
+	ue5: get_icon_pos('UE5_ICON_POS') || { x: 0, y: 0 },
+	obs: get_icon_pos('OBS_ICON_POS') || { x: 0, y: 0 },
+	chrome: get_icon_pos('CHROME_ICON_POS') || { x: 0, y: 0 },
+	login: get_icon_pos('LOGIN_ICON_POS') || { x: 0, y: 0 }
 };
 
 robot.setKeyboardDelay(300);
@@ -82,8 +82,7 @@ async function main() {
 		await sleep(5000);
 	}
 
-	// Open Screenshot Server
-	// Open OBS Studio
+	// Open Screenshot Server and OBS Studio
 	if (['kdmofa', 'moca', 'linz'].includes(mode)) {
 		await open_screenshot_node_server();
 		await sleep(10000);
@@ -92,7 +91,7 @@ async function main() {
 	}
 
 	// Open Unreal Engine 5
-	if (['kdmofa', 'moca', 'linz', 'kdmofa-vr', 'moca-vr', 'linz'].includes(mode)) {
+	if (['kdmofa', 'moca', 'linz', 'kdmofa-vr', 'linz'].includes(mode)) {
 		await click_desktop_icon(icon_pos.ue5);
 		await sleep(50000);
 	}
