@@ -1,3 +1,3 @@
-cd "cd ..\\screenshot-server";
+cd "..\\screenshot-server";
 tsc
 node dist
