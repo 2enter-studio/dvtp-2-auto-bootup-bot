@@ -98,14 +98,14 @@ async function main() {
 	// Open Unreal Engine 5
 	if (["kdmofa", "moca", "linz", "kdmofa-vr", "linz"].includes(mode)) {
 		await click_desktop_icon(icon_pos.ue5);
-		await sleep(50000);
+		await sleep(30000);
 	}
 
 	// Open Arena
 	if (["kdmofa", "moca", "linz"].includes(mode)) {
 		await click_desktop_icon(icon_pos.arena);
 		// Switch back to UE5
-		await sleep(20000);
+		await sleep(50000);
 		await switch_tab(4);
 		await sleep(5000);
 	}
@@ -126,7 +126,7 @@ async function main() {
 
 const wait_until_connection = setInterval(async () => {
 	//	get_mouse_pos();
-	dns.resolve("dvtp2.2enter.art", function(err, addresses) {
+	dns.resolve("dvtp2.2enter.art", function (err, addresses) {
 		if (err) console.log(err);
 		else {
 			console.log(addresses);
