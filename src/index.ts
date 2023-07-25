@@ -118,8 +118,8 @@ async function main() {
 
 	if (mode === "moca-vr") {
 		await sleep(3000);
-		console.log("Switching Tab 3 Times");
-		await switch_tab(3);
+		console.log("Switching Tab 1 Times");
+		await switch_tab(1);
 		await sleep(1000);
 	}
 	// Play UE5
