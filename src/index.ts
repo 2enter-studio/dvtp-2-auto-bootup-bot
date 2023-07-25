@@ -102,7 +102,7 @@ async function main() {
 	if (["kdmofa", "moca", "linz", "kdmofa-vr", "linz"].includes(mode)) {
 		console.log("Opening Unreal Engine 5");
 		await click_desktop_icon(icon_pos.ue5);
-		await sleep(30000);
+		await sleep(60000);
 	}
 
 	// Open Arena
@@ -110,14 +110,9 @@ async function main() {
 		console.log("Opening Resolume Arena");
 		await click_desktop_icon(icon_pos.arena);
 		// Switch back to UE5
-		await sleep(50000);
-		if (mode === "moca") {
-			console.log("Switching Tab 5 Times");
-			await switch_tab(5);
-		} else {
-			console.log("Switching Tab 4 Times");
-			await switch_tab(4);
-		}
+		await sleep(30000);
+		console.log("Switching Tab 4 Times");
+		await switch_tab(4);
 
 		await sleep(5000);
 	}
