@@ -117,7 +117,7 @@ async function main() {
 	}
 
 	if (mode === "moca-vr") {
-		await sleep(120000);
+		await sleep(3000);
 		console.log("Switching Tab 3 Times");
 		await switch_tab(3);
 		await sleep(1000);
@@ -134,7 +134,7 @@ async function main() {
 
 const wait_until_connection = setInterval(async () => {
 	//	get_mouse_pos();
-	dns.resolve("dvtp2.2enter.art", function(err, addresses) {
+	dns.resolve("dvtp2.2enter.art", function (err, addresses) {
 		if (err) console.log(err);
 		else {
 			console.log(addresses);
