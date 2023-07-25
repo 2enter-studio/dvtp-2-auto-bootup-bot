@@ -83,35 +83,42 @@ async function main() {
 
 	// Connect to Wi-Fi
 	if (["kdmofa", "kdmofa-vr", "kdmofa-cctv"].includes(mode)) {
+		console.log("Login to Wi-Fi");
 		await login_wifi();
 		await sleep(5000);
 	}
 
 	// Open Screenshot Server and OBS Studio
 	if (["kdmofa", "moca", "linz"].includes(mode)) {
+		console.log("Opening Screenshot Server");
 		await open_screenshot_node_server();
 		await sleep(10000);
+		console.log("Opening OBS Studio");
 		await click_desktop_icon(icon_pos.obs);
 		await sleep(5000);
 	}
 
 	// Open Unreal Engine 5
 	if (["kdmofa", "moca", "linz", "kdmofa-vr", "linz"].includes(mode)) {
+		console.log("Opening Unreal Engine 5");
 		await click_desktop_icon(icon_pos.ue5);
 		await sleep(30000);
 	}
 
 	// Open Arena
 	if (["kdmofa", "moca", "linz"].includes(mode)) {
+		console.log("Opening Resolume Arena");
 		await click_desktop_icon(icon_pos.arena);
 		// Switch back to UE5
 		await sleep(50000);
+		console.log("Switching Tab 4 Times");
 		await switch_tab(4);
 		await sleep(5000);
 	}
 
 	if (mode === "moca-vr") {
 		await sleep(120000);
+		console.log("Switching Tab 3 Times");
 		await switch_tab(3);
 		await sleep(1000);
 	}
@@ -119,6 +126,7 @@ async function main() {
 	if (
 		["kdmofa", "moca", "linz", "kdmofa-vr", "moca-vr", "linz-vr"].includes(mode)
 	) {
+		console.log("Playing Unreal Engine 5 through keyboard shortcut: alt+P");
 		unreal_play();
 	}
 	console.log("All done!");
@@ -126,7 +134,7 @@ async function main() {
 
 const wait_until_connection = setInterval(async () => {
 	//	get_mouse_pos();
-	dns.resolve("dvtp2.2enter.art", function (err, addresses) {
+	dns.resolve("dvtp2.2enter.art", function(err, addresses) {
 		if (err) console.log(err);
 		else {
 			console.log(addresses);
