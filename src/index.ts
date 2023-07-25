@@ -120,7 +120,11 @@ async function main() {
 		await sleep(3000);
 		console.log("Switching Tab 1 Times");
 		await switch_tab(1);
-		await sleep(1000);
+		await sleep(3000);
+		// Closing Edge
+		key_binding(["control", "w"]);
+		console.log("Closing Edge Browser");
+		await sleep(3000);
 	}
 	// Play UE5
 	if (
