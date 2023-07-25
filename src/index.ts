@@ -111,15 +111,21 @@ async function main() {
 		await click_desktop_icon(icon_pos.arena);
 		// Switch back to UE5
 		await sleep(50000);
-		console.log("Switching Tab 4 Times");
-		await switch_tab(4);
+		if (mode === "moca") {
+			console.log("Switching Tab 5 Times");
+			await switch_tab(5);
+		} else {
+			console.log("Switching Tab 4 Times");
+			await switch_tab(4);
+		}
+
 		await sleep(5000);
 	}
 
 	if (mode === "moca-vr") {
 		await sleep(3000);
-		console.log("Switching Tab 2 Times");
-		await switch_tab(2);
+		console.log("Switching Tab 3 Times");
+		await switch_tab(3);
 		// await sleep(3000);
 		// Closing Edge
 		// key_binding(["control", "w"]);
