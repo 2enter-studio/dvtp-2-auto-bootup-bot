@@ -99,7 +99,7 @@ async function main() {
 	}
 
 	// Open Unreal Engine 5
-	if (["kdmofa", "moca", "linz", "kdmofa-vr", "linz"].includes(mode)) {
+	if (["kdmofa", "moca", "linz", "kdmofa-vr"].includes(mode)) {
 		console.log("Opening Unreal Engine 5");
 		await click_desktop_icon(icon_pos.ue5);
 		await sleep(60000);
