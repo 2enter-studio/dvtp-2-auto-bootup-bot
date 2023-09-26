@@ -10,6 +10,7 @@ const modes = [
 	"moca",
 	"linz",
 	"linz-vr",
+	"draft-land",
 ];
 
 export default () => {

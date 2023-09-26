@@ -89,24 +89,24 @@ async function main() {
 	}
 
 	// Open Screenshot Server and OBS Studio
-	if (["kdmofa", "moca", "linz"].includes(mode)) {
+	if (["kdmofa", "moca", "linz", "draft-land"].includes(mode)) {
 		console.log("Opening Screenshot Server");
 		await open_screenshot_node_server();
 		await sleep(10000);
 		console.log("Opening OBS Studio");
 		await click_desktop_icon(icon_pos.obs);
-		await sleep(5000);
+		await sleep(12000);
 	}
 
 	// Open Unreal Engine 5
-	if (["kdmofa", "moca", "linz", "kdmofa-vr"].includes(mode)) {
+	if (["kdmofa", "moca", "linz", "kdmofa-vr", "draft-land"].includes(mode)) {
 		console.log("Opening Unreal Engine 5");
 		await click_desktop_icon(icon_pos.ue5);
 		await sleep(60000);
 	}
 
 	// Open Arena
-	if (["kdmofa", "moca", "linz"].includes(mode)) {
+	if (["kdmofa", "moca", "linz", "draft-land"].includes(mode)) {
 		console.log("Opening Resolume Arena");
 		await click_desktop_icon(icon_pos.arena);
 		// Switch back to UE5
@@ -129,7 +129,15 @@ async function main() {
 	}
 	// Play UE5
 	if (
-		["kdmofa", "moca", "linz", "kdmofa-vr", "moca-vr", "linz-vr"].includes(mode)
+		[
+			"kdmofa",
+			"moca",
+			"linz",
+			"kdmofa-vr",
+			"moca-vr",
+			"linz-vr",
+			"draft-land",
+		].includes(mode)
 	) {
 		console.log("Playing Unreal Engine 5 through keyboard shortcut: alt+P");
 		unreal_play();
