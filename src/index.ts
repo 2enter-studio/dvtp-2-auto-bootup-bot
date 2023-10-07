@@ -93,9 +93,14 @@ async function main() {
 		console.log("Opening Screenshot Server");
 		await open_screenshot_node_server();
 		await sleep(10000);
-		console.log("Opening OBS Studio");
-		await click_desktop_icon(icon_pos.obs);
-		await sleep(12000);
+
+		if (mode !== 'draft-land') {
+			console.log("Opening OBS Studio");
+			await click_desktop_icon(icon_pos.obs);
+			await sleep(6000);
+		}
+
+		await sleep(6000);
 	}
 
 	// Open Unreal Engine 5

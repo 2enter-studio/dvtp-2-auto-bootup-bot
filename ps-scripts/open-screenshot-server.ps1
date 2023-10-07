@@ -1,5 +1,8 @@
 cd "..\\screenshot-server";
-git pull
-pnpm i 
-tsc
-node dist 
+
+while ($true) {
+  git pull
+  pnpm i 
+  tsc
+  node dist 
+}
